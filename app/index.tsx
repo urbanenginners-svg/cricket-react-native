@@ -5,9 +5,8 @@ import CricketLogo from "../assets/svg/cricket_logo.svg";
 
 export default function HomeScreen() {
     return (
-        <View className="">
+        <View className="flex-1 bg-blue-600 justify-center items-center">
             <CricketLogo width={140} height={140} />
-            <Text>Home</Text>
         </View>
     );
 }
