@@ -4,7 +4,6 @@
     "slug": "cricket",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "cricket",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -22,6 +21,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
