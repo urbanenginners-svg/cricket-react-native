@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native"
 import PhoneInput, { ICountry, isValidPhoneNumber } from 'react-native-international-phone-number';
+import { router } from "expo-router";
 
 import Google from "@/assets/svg/google.svg";
 import Facebook from "@/assets/svg/facebook.svg";
@@ -8,6 +9,12 @@ import Facebook from "@/assets/svg/facebook.svg";
 export default function Login() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedCountry, setSelectedCountry] = useState<ICountry>();
+
+    useEffect(() => {
+        setTimeout(() => {
+            router.replace("/(auth)/createAccount");
+        }, 2500);
+    }, []);
 
     return <View className="">
         <View className="mb-5">
@@ -34,9 +41,9 @@ export default function Login() {
 
         <View className="mt-6">
             <View className="flex-row items-center mb-6">
-                <View className="flex-1  border border-[#EDF1F3]"></View>
+                <View className="flex-1  border border-stroke_grey_1"></View>
                 <Text className="text-grey_1 text-xs font-medium mx-2">Or</Text>
-                <View className="flex-1  border border-[#EDF1F3]"></View>
+                <View className="flex-1  border border-stroke_grey_1"></View>
             </View>
 
             <View>

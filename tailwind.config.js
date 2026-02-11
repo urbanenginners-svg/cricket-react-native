@@ -9,6 +9,7 @@ module.exports = {
         blue_dark: "#181823",
         black_1: "#1A1C1E",
         grey_1: "#6C7278",
+        stroke_grey_1: "#EDF1F3"
       },
     },
   },
