@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View, Platform } from "react-native";
+import PhoneInput, { ICountry } from "react-native-international-phone-number";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import AppSelect from "@/components/common/AppSelect";
-import PhoneInput, { ICountry } from "react-native-international-phone-number";
 
 export default function CricketCricketAccount() {
     const [gender, setGender] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedCountry, setSelectedCountry] = useState<ICountry>();
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false);
 
     return <View className="">
         <View className="mb-5">
@@ -20,7 +23,7 @@ export default function CricketCricketAccount() {
             <TextInput
                 placeholder="Enter your full name"
                 placeholderTextColor="#9CA3AF"
-                className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-3 text-black"
+                className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-4 text-black"
             />
         </View>
 
@@ -45,8 +48,37 @@ export default function CricketCricketAccount() {
                 selectedCountry={selectedCountry}
                 onChangeSelectedCountry={setSelectedCountry}
                 placeholder="9999 9999 99"
-                phoneInputStyles={{ flagContainer: { backgroundColor: "white" } }}
+                phoneInputStyles={{ flagContainer: { backgroundColor: "white" }, container: { borderColor: "#EDF1F3" } }}
             />
+        </View>
+
+        <View className="mb-4">
+            <Text className="text-grey_1 text-xs font-medium mb-2">Date of Birth</Text>
+            <Pressable
+                onPress={() => {
+                    setShow(true);
+                }}
+                className="border border-gray-200 rounded-xl px-4 py-4 bg-white flex-row justify-between items-center"
+            >
+                <Text
+                    className={`text-base ${show ? "text-black" : "text-gray-400"
+                        }`}
+                >
+                    {show ? date.toLocaleDateString() : "Select Date of Birth"}
+                </Text>
+
+                <Text className="text-gray-400">▼</Text>
+            </Pressable>
+
+            {show && (
+                <DateTimePicker
+                    value={date}
+                    mode="date"
+                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                    // onChange={onChange}
+                    maximumDate={new Date()} // Prevent future dates
+                />
+            )}
         </View>
 
         <View className="mb-4">
@@ -54,9 +86,16 @@ export default function CricketCricketAccount() {
             <TextInput
                 placeholder="Enter your place of birth"
                 placeholderTextColor="#9CA3AF"
-                className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-3 text-black"
+                className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-4 text-black"
             />
         </View>
+
+        <View className="mb-6">
+            <Pressable className="py-[14px] rounded-[10px] bg-primary text-white text-center text-sm font-medium mt-6">
+                <Text className="text-white text-center text-sm font-medium">Register</Text>
+            </Pressable>
+        </View>
+
 
     </View>
 }

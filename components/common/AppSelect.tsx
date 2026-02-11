@@ -36,7 +36,6 @@ export default function AppSelect({
         <>
             <Pressable
                 onPress={() => {
-                    console.log("pressed");
                     openSheet();
                 }}
                 className="border border-gray-200 rounded-xl px-4 py-4 bg-white flex-row justify-between items-center"
