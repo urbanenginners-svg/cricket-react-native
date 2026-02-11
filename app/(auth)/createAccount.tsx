@@ -1,7 +1,11 @@
-import { Pressable, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Text, TextInput, View } from "react-native";
+
+import AppSelect from "@/components/common/AppSelect";
 
 export default function CricketCricketAccount() {
-    return <View>
+    const [gender, setGender] = useState("");
+    return <View className="flex-1">
         <View className="mb-5">
             <Text className="text-black_1 text-2xl font-bold">Create Your Cricket Account</Text>
             <Text className="text-grey_1 text-xs font-medium pt-[10px]">Join your academy or set up your own. Whether you’re a player or a coach. Your journey begins here.</Text>
@@ -16,9 +20,17 @@ export default function CricketCricketAccount() {
             />
         </View>
 
-        <View className="mb-4">
+        <View className="mb-4 flex-1">
             <Text className="text-grey_1 text-xs font-medium mb-2">Gender</Text>
-
+            <AppSelect
+                options={[
+                    { label: "Male", value: "male" },
+                    { label: "Female", value: "female" },
+                    { label: "Other", value: "other" },
+                ]}
+                value={gender}
+                onChange={setGender}
+            />
         </View>
 
     </View>
