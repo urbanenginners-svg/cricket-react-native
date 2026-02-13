@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, Text, TextInput, View, Platform } from "react-native";
 import PhoneInput, { ICountry } from "react-native-international-phone-number";
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -12,6 +12,12 @@ export default function CricketCricketAccount() {
     const [selectedCountry, setSelectedCountry] = useState<ICountry>();
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            router.replace("/(setup)/verifyOtp");
+        }, 2500);
+    }, []);
 
     return <View className="flex-1 justify-between">
         <View className="">

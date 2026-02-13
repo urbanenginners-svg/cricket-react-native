@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pressable, Text, View } from "react-native"
 import PhoneInput, { ICountry, isValidPhoneNumber } from 'react-native-international-phone-number';
 import { router } from "expo-router";
@@ -9,12 +9,6 @@ import Facebook from "@/assets/svg/facebook.svg";
 export default function Login() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedCountry, setSelectedCountry] = useState<ICountry>();
-
-    useEffect(() => {
-        setTimeout(() => {
-            // router.replace("/(auth)/createAccount");
-        }, 2500);
-    }, []);
 
     return <View className="flex-1 justify-between">
         <View>
