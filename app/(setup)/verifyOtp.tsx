@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 
 export default function VerifyOtp() {
     const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
@@ -50,11 +50,12 @@ export default function VerifyOtp() {
     };
 
     const handleConfirm = () => {
-        const otpCode = otp.join("");
-        if (otpCode.length === 6) {
-            // TODO: Verify OTP API call
-            console.log("OTP entered:", otpCode);
-        }
+        router.replace("/(setup)/onboarding/selectRole");
+        // const otpCode = otp.join("");
+        // if (otpCode.length === 6) {
+        //     // TODO: Verify OTP API call
+        //     console.log("OTP entered:", otpCode);
+        // }
     };
 
     const formatTime = (seconds: number) => {

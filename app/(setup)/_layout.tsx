@@ -1,9 +1,9 @@
 import { router, Slot, Stack, useSegments } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { Pressable, View } from "react-native";
+import { Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import BackArrow from "@/assets/icons/back_angle.svg"
+import Logout from "@/assets/icons/logout.svg"
 
 export default function SetupLayout() {
     const segments = useSegments() as string[];
@@ -38,13 +38,11 @@ export default function SetupLayout() {
                         onPress={handleLogout}
                         style={{ paddingHorizontal: 12 }}
                     >
-                        <Ionicons name="power-outline" size={22} color="red" />
+                        <Logout />
                     </Pressable>
                 ) : null,
         }}
     >
-        <View className="flex-1 px-8 pt-12">
-            <Slot />
-        </View>
+        <Slot />
     </Stack>
 }
