@@ -2,8 +2,8 @@ import { Stack, router } from "expo-router";
 import { useState } from "react";
 import { Text, View, TouchableOpacity, Pressable } from "react-native";
 
-import PlayerIcon from "@/assets/images/player_bat_ball.svg";
-import CoachIcon from "@/assets/images/coach_cap.svg";
+import PlayerIcon from "@/assets/images/bat_ball.svg";
+import CoachIcon from "@/assets/images/cap.svg";
 
 type Role = "player" | "coach" | null;
 
