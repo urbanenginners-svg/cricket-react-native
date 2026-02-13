@@ -12,7 +12,7 @@ export default function SelectRole() {
 
     const handleContinue = () => {
         if (selectedRole === "player") {
-            // router.push("/(setup)/onboarding/playerOnboarding");
+            router.push("/(setup)/onboarding/playerOnboarding/selectPlayerType");
         } else if (selectedRole === "coach") {
             // router.push("/(setup)/onboarding/coachOnboarding");
         }
