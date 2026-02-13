@@ -13,11 +13,6 @@ export default function CricketCricketAccount() {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
 
-    useEffect(() => {
-        setTimeout(() => {
-            router.replace("/(setup)/verifyOtp");
-        }, 2500);
-    }, []);
 
     return <View className="flex-1 justify-between">
         <View className="">
@@ -99,7 +94,7 @@ export default function CricketCricketAccount() {
             </View>
 
             <View className="mb-6">
-                <Pressable className="py-[14px] rounded-[10px] bg-primary text-white text-center text-sm font-medium mt-6">
+                <Pressable className="py-[14px] rounded-[10px] bg-primary text-white text-center text-sm font-medium mt-6" onPress={() => router.replace("/(setup)/verifyOtp")}>
                     <Text className="text-white text-center text-sm font-medium">Register</Text>
                 </Pressable>
             </View>
