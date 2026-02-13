@@ -199,19 +199,20 @@ export default function SelectPlayerType() {
                 <View className="px-8 pb-8 pt-3 bg-white">
                     <TouchableOpacity
                         onPress={() => {
+                            router.push("/onboarding/playerOnboarding/profileConfirmation");
                             // Handle continue action
                         }}
                         disabled={!isFormValid}
                         activeOpacity={0.8}
                         className={`w-full py-4 rounded-xl items-center ${isFormValid
-                                ? "bg-primary"
-                                : "bg-stroke_grey_1"
+                            ? "bg-primary"
+                            : "bg-stroke_grey_1"
                             }`}
                     >
                         <Text
                             className={`text-base font-semibold ${isFormValid
-                                    ? "text-white"
-                                    : "text-[#999999]"
+                                ? "text-white"
+                                : "text-[#999999]"
                                 }`}
                         >
                             Continue
