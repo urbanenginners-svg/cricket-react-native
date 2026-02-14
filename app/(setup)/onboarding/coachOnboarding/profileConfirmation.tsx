@@ -18,8 +18,7 @@ export default function ProfileConfirmation() {
     const router = useRouter();
 
     const handleNext = () => {
-
-        // Navigate to the next screen or complete onboarding
+        router.push("/onboarding/selectAcademy");
     };
 
     return (
