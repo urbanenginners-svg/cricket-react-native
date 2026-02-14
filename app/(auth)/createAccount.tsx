@@ -26,7 +26,7 @@ export default function CricketCricketAccount() {
                 <TextInput
                     placeholder="Enter your full name"
                     placeholderTextColor="#9CA3AF"
-                    className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-4 text-black"
+                    className="bg-white border border-stroke_grey_1 rounded-xl  px-4 py-4 text-black"
                 />
             </View>
 
@@ -89,7 +89,7 @@ export default function CricketCricketAccount() {
                 <TextInput
                     placeholder="Enter your place of birth"
                     placeholderTextColor="#9CA3AF"
-                    className="bg-white shadow-sm border border-stroke_grey_1 rounded-lg px-4 py-4 text-black"
+                    className="bg-white border border-stroke_grey_1 rounded-xl px-4 py-4 text-black"
                 />
             </View>
 
