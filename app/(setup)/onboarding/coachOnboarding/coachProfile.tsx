@@ -187,8 +187,7 @@ export default function CoachProfile() {
                 <View className="px-8 pb-8 pt-3 bg-white">
                     <TouchableOpacity
                         onPress={() => {
-                            // Handle continue action
-                            // router.push("/onboarding/coachOnboarding/nextStep");
+                            router.push("/onboarding/coachOnboarding/profileConfirmation");
                         }}
                         disabled={!isFormValid}
                         activeOpacity={0.8}
