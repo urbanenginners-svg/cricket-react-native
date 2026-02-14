@@ -14,7 +14,7 @@ export default function SelectRole() {
         if (selectedRole === "player") {
             router.push("/(setup)/onboarding/playerOnboarding/selectPlayerType");
         } else if (selectedRole === "coach") {
-            // router.push("/(setup)/onboarding/coachOnboarding");
+            router.push("/(setup)/onboarding/coachOnboarding/coachProfile");
         }
     };
 
