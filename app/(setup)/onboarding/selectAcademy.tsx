@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import {
     ScrollView,
@@ -72,6 +72,7 @@ export default function SelectAcademy() {
     const [selectedAcademyId, setSelectedAcademyId] = useState<string | null>(
         null
     );
+    const router = useRouter();
 
     const filteredAcademies = academies.filter(
         (academy) =>
@@ -204,6 +205,7 @@ export default function SelectAcademy() {
                     <TouchableOpacity
                         onPress={() => {
                             // Handle request to join
+                            router.push("/profile");
                         }}
                         disabled={!selectedAcademyId}
                         activeOpacity={0.8}
