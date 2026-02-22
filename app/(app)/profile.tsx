@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, ScrollView, Pressable, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 type MenuItemProps = {
@@ -58,7 +59,10 @@ export default function ProfileScreen() {
                 showsVerticalScrollIndicator={false}
             >
                 {/* ── Profile Avatar & Info ───────────────────────── */}
-                <View className="items-center py-7 bg-white">
+                <Pressable
+                    className="items-center py-7 bg-white active:opacity-80"
+                    onPress={() => router.push("/(screens)/profileScreens/updateProfile")}
+                >
                     <View className="w-[110px] h-[110px] rounded-full overflow-hidden mb-3.5 border-none">
                         <Image
                             source={{
@@ -73,7 +77,7 @@ export default function ProfileScreen() {
                     <Text className="text-sm text-[#8A8A8E] mt-1">
                         Right Hand Batter
                     </Text>
-                </View>
+                </Pressable>
 
                 {/* ── Menu Section 1: Cricket & Academy ───────────── */}
                 <View className="bg-white rounded-xl mx-4 mt-4 overflow-hidden">
@@ -86,6 +90,7 @@ export default function ProfileScreen() {
                             />
                         }
                         label="My Cricket Profile"
+                        onPress={() => router.push("/(screens)/profileScreens/playerCricketProfile")}
                     // showDivider
                     />
                 </View>
