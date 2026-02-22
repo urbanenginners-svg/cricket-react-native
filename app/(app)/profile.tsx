@@ -14,10 +14,10 @@ type MenuItemProps = {
 // ── Reusable Menu Row Component ────────────────────────────────────────────────
 function MenuItem({ icon, label, onPress, showDivider }: MenuItemProps) {
     return (
-        <View>
+        <View className="bg-[#F6F6F6]">
             <Pressable
                 onPress={onPress}
-                className="flex-row items-center justify-between py-[14px] px-4 active:bg-gray-50 bg-white"
+                className="flex-row items-center justify-between py-[14px] px-4 active:bg-gray-200"
             >
                 <View className="flex-row items-center gap-3.5">
                     {icon}
@@ -28,7 +28,7 @@ function MenuItem({ icon, label, onPress, showDivider }: MenuItemProps) {
                 <Ionicons name="chevron-forward" size={20} color="#C7C7CC" />
             </Pressable>
             {showDivider && (
-                <View className="h-[0.5px] bg-[#E5E5EA] ml-[54px]" />
+                <View className="h-px bg-[#00000033] ml-[54px]" />
             )}
         </View>
     );
@@ -37,7 +37,7 @@ function MenuItem({ icon, label, onPress, showDivider }: MenuItemProps) {
 // ── Main Profile Screen ────────────────────────────────────────────────────────
 export default function ProfileScreen() {
     return (
-        <SafeAreaView className="flex-1 bg-[#F2F2F7]">
+        <SafeAreaView className="flex-1 bg-white">
             {/* ── Header ─────────────────────────────────────────── */}
             <View className="flex-row items-center justify-between px-5 py-3 bg-white">
                 <Text className="text-[28px] font-bold text-[#1C1C1E] tracking-tight">
@@ -53,13 +53,13 @@ export default function ProfileScreen() {
             </View>
 
             <ScrollView
-                className="flex-1"
+                className="flex-1 bg-white"
                 contentContainerStyle={{ paddingBottom: 32 }}
                 showsVerticalScrollIndicator={false}
             >
                 {/* ── Profile Avatar & Info ───────────────────────── */}
                 <View className="items-center py-7 bg-white">
-                    <View className="w-[110px] h-[110px] rounded-full overflow-hidden mb-3.5 border-2 border-[#E8E8ED]">
+                    <View className="w-[110px] h-[110px] rounded-full overflow-hidden mb-3.5 border-none">
                         <Image
                             source={{
                                 uri: "https://ui-avatars.com/api/?name=Biff+Tannen&size=240&background=E8F0FE&color=1D61E7&bold=true",
@@ -86,8 +86,11 @@ export default function ProfileScreen() {
                             />
                         }
                         label="My Cricket Profile"
-                        showDivider
+                    // showDivider
                     />
+                </View>
+
+                <View className="bg-white rounded-xl mx-4 mt-4 overflow-hidden">
                     <MenuItem
                         icon={
                             <Ionicons
@@ -98,6 +101,7 @@ export default function ProfileScreen() {
                         }
                         label="Academy Details"
                     />
+
                 </View>
 
                 {/* ── Menu Section 2: General ─────────────────────── */}
