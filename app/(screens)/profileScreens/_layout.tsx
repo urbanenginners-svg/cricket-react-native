@@ -43,6 +43,10 @@ export default function ProfileScreensLayout() {
                 name="notifications"
                 options={{ headerTitle: "Notifications" }}
             />
+            <Stack.Screen
+                name="myAcademy"
+                options={{ headerTitle: "My Academy" }}
+            />
         </Stack>
     );
 }

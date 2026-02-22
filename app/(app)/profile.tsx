@@ -106,6 +106,7 @@ export default function ProfileScreen() {
                             />
                         }
                         label="Academy Details"
+                        onPress={() => router.push("/(screens)/profileScreens/myAcademy")}
                     />
 
                 </View>
