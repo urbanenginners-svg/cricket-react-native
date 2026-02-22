@@ -90,7 +90,8 @@ export default function ProfileScreen() {
                             />
                         }
                         label="My Cricket Profile"
-                        onPress={() => router.push("/(screens)/profileScreens/playerCricketProfile")}
+                        onPress={() => router.push("/(screens)/profileScreens/coachCricketProfile")}
+                    // onPress={() => router.push("/(screens)/profileScreens/playerCricketProfile")}
                     // showDivider
                     />
                 </View>
