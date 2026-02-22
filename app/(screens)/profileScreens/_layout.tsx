@@ -39,6 +39,10 @@ export default function ProfileScreensLayout() {
                 name="coachCricketProfile"
                 options={{ headerTitle: "My Cricket Profile" }}
             />
+            <Stack.Screen
+                name="notifications"
+                options={{ headerTitle: "Notifications" }}
+            />
         </Stack>
     );
 }

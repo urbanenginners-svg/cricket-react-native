@@ -122,6 +122,7 @@ export default function ProfileScreen() {
                         }
                         label="Notifications"
                         showDivider
+                        onPress={() => router.push("/(screens)/profileScreens/notifications")}
                     />
                     <MenuItem
                         icon={
