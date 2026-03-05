@@ -47,6 +47,10 @@ export default function ProfileScreensLayout() {
                 name="myAcademy"
                 options={{ headerTitle: "My Academy" }}
             />
+            <Stack.Screen
+                name="addAcademy/index"
+                options={{ headerTitle: "Add Academy" }}
+            />
         </Stack>
     );
 }

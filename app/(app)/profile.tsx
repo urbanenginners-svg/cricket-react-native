@@ -106,9 +106,20 @@ export default function ProfileScreen() {
                             />
                         }
                         label="Academy Details"
+                        showDivider
                         onPress={() => router.push("/(screens)/profileScreens/myAcademy")}
                     />
-
+                    <MenuItem
+                        icon={
+                            <Ionicons
+                                name="add-circle-outline"
+                                size={24}
+                                color="#1C1C1E"
+                            />
+                        }
+                        label="Add Academy"
+                        onPress={() => router.push("/(screens)/profileScreens/addAcademy")}
+                    />
                 </View>
 
                 {/* ── Menu Section 2: General ─────────────────────── */}
