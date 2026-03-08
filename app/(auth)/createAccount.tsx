@@ -94,7 +94,7 @@ export default function CricketCricketAccount() {
             </View>
 
             <View className="mb-6">
-                <Pressable className="py-[14px] rounded-[10px] bg-primary text-white text-center text-sm font-medium mt-6" onPress={() => router.replace("/(setup)/verifyOtp")}>
+                <Pressable className="py-[14px] rounded-[10px] bg-primary text-white text-center text-sm font-medium mt-6" onPress={() => router.push("/(setup)/verifyOtp")}>
                     <Text className="text-white text-center text-sm font-medium">Register</Text>
                 </Pressable>
             </View>
