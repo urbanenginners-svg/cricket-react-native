@@ -16,6 +16,7 @@ type AppSelectProps = {
     value?: string;
     placeholder?: string;
     onChange: (value: string) => void;
+    hasError?: boolean;
 };
 
 export default function AppSelect({
@@ -23,6 +24,7 @@ export default function AppSelect({
     value,
     placeholder = "Select option",
     onChange,
+    hasError = false,
 }: AppSelectProps) {
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -38,7 +40,7 @@ export default function AppSelect({
                 onPress={() => {
                     openSheet();
                 }}
-                className="border border-gray-200 rounded-xl px-4 py-4 bg-white flex-row justify-between items-center"
+                className={`border rounded-xl px-4 py-4 bg-white flex-row justify-between items-center ${hasError ? "border-red-400" : "border-gray-200"}`}
             >
                 <Text
                     className={`text-base ${selectedOption ? "text-black" : "text-gray-400"

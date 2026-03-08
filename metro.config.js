@@ -21,6 +21,7 @@
 
 const { getDefaultConfig } = require("expo/metro-config");
 const { withNativeWind } = require('nativewind/metro');
+const path = require('path');
 
 const config = getDefaultConfig(__dirname)
 
@@ -34,6 +35,17 @@ config.resolver = {
     ...resolver,
     assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
     sourceExts: [...resolver.sourceExts, "svg"],
+    // Explicitly resolve "zod" to its CJS entry to work around Metro's
+    // inability to handle zod's complex package.json exports map.
+    resolveRequest: (context, moduleName, platform) => {
+        if (moduleName === 'zod') {
+            return {
+                filePath: path.resolve(__dirname, 'node_modules/zod/index.cjs'),
+                type: 'sourceFile',
+            };
+        }
+        return context.resolveRequest(context, moduleName, platform);
+    },
 };
 
 module.exports = withNativeWind(config, { input: './global.css' })
