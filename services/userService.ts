@@ -44,9 +44,8 @@ export interface UpdateOnboardingPayload {
  */
 export const getProfile = async (): Promise<User> => {
     // TODO: Implement when API is ready
-    // const response = await apiClient.get(USER_ENDPOINTS.GET_PROFILE);
-    // return response.data;
-    throw new Error("getProfile() not implemented yet");
+    const response = await apiClient.get(USER_ENDPOINTS.GET_PROFILE);
+    return response.data;
 };
 
 /**

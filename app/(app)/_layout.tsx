@@ -1,4 +1,5 @@
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
+import { useAuthStore } from "@/store/authStore";
 import { View, Text, Pressable, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
@@ -89,6 +90,13 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
 // ── App Layout ─────────────────────────────────────────────────────────────────
 export default function AppLayout() {
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+    // Not logged in — send to login
+    if (!isAuthenticated) {
+        return <Redirect href="/(auth)/login" />;
+    }
+
     return (
         <Tabs
             tabBar={(props) => <CustomTabBar {...props} />}

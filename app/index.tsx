@@ -1,17 +1,30 @@
 
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useEffect } from "react";
 
 import CricketLogo from "../assets/svg/cricket_logo.svg";
 import { router } from "expo-router";
+import { useAuthStore } from "@/store/authStore";
 
 export default function HomeScreen() {
+    const { isAuthenticated , user} = useAuthStore((state) => state);
 
     useEffect(() => {
-        setTimeout(() => {
-            router.replace("/(auth)/login");
+        const timer = setTimeout(() => {
+            if (isAuthenticated) {
+                console.log(user, ">>>>> user in home screen");
+                if(user && user.isOnboardingCompleted){
+                    router.replace("/(app)");
+                }else{
+
+                    router.replace("/(setup)/onboarding/selectRole");
+                }
+            } else {
+                router.replace("/(auth)/login");
+            }
         }, 2500);
-    }, []);
+        return () => clearTimeout(timer);
+    }, [isAuthenticated]);
 
     return (
         <View className="flex-1 bg-blue_dark justify-center items-center">

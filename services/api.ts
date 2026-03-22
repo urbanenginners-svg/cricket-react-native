@@ -41,7 +41,6 @@ apiClient.interceptors.response.use(
         if (error.response?.status === 401) {
             // Token expired or invalid — clear stored credentials
             await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.ACCESS_TOKEN);
-            await SecureStore.deleteItemAsync(SECURE_STORE_KEYS.REFRESH_TOKEN);
             // TODO: Redirect to login using expo-router when needed
             // router.replace("/(auth)/login");
         }

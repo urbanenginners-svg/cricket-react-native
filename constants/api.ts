@@ -19,7 +19,9 @@ export const AUTH_ENDPOINTS = {
 
 // ── User / Profile ────────────────────────────
 export const USER_ENDPOINTS = {
-  GET_PROFILE: "/user/profile",
+  GET_PROFILE: "/auth/profile",
+
+
   UPDATE_PROFILE: "/user/profile",
   UPDATE_ROLE: "/user/role",
   UPDATE_ONBOARDING: "/user/onboarding",

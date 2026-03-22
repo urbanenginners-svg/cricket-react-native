@@ -12,6 +12,7 @@
 
 import { create } from "zustand";
 import * as SecureStore from "expo-secure-store";
+import { getProfile } from "@/services/userService";
 
 // ── SecureStore Key Names ──────────────────────
 export const SECURE_STORE_KEYS = {
@@ -26,7 +27,7 @@ export interface User {
   phone?: string;
   role?: "player" | "coach" | "academy_owner" | null;
   profileImage?: string;
-  isOnboarded?: boolean;
+  isOnboardingCompleted?: boolean;
 }
 
 interface AuthState {
@@ -76,6 +77,15 @@ export const useAuthStore = create<AuthState>((set) => ({
     );
     if (token) {
       set({ access_token: token, isAuthenticated: true });
+      try {
+        const user = await getProfile(); // Implement this function to get user data from API
+        // console.log(user, ">>>>> user from profile api");
+        set({ user });
+      } catch (e) {
+        set({ user: null, access_token: null, isAuthenticated: false });
+        console.log(e, ">>>>> error fetching profile");
+      }
+
     }
     set({ isHydrated: true });
   },
