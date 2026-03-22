@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Pressable, ScrollView, Text, TextInput, View, Platform } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View, Platform } from "react-native";
 import PhoneInput, { ICountry, isValidPhoneNumber } from "react-native-international-phone-number";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
+import { useAuth } from "@/hooks/useAuth";
+import { GenderEnum } from "@/types/enums/genderEnum";
 
 import AppSelect from "@/components/common/AppSelect";
 
@@ -45,6 +47,8 @@ export default function CreateCricketAccount() {
     const [selectedCountry, setSelectedCountry] = useState<ICountry>();
     const [showDatePicker, setShowDatePicker] = useState(false);
 
+    const { handleRegister, loading, error } = useAuth();
+
     const {
         control,
         handleSubmit,
@@ -73,9 +77,23 @@ export default function CreateCricketAccount() {
     const getMinDate = () => { const d = new Date(); d.setFullYear(d.getFullYear() - 80); return d; };
     const getMaxDate = () => { const d = new Date(); d.setFullYear(d.getFullYear() - 5); return d; };
 
-    const onSubmit = (data: CreateAccountFormData) => {
-        console.log("Form Data:", data);
-        router.push("/(setup)/verifyOtp");
+    const onSubmit = async (data: CreateAccountFormData) => {
+        try {
+            const formattedPhoneNumber = `${selectedCountry ? `${selectedCountry.idd.root}${selectedCountry.idd.suffixes[0] ?? ""}` : ""}${data.phoneNumber}`;
+            await handleRegister({
+                name: data.fullName,
+                phoneNumber: formattedPhoneNumber,
+                gender: data.gender as GenderEnum,
+                dateOfBirth: data.dateOfBirth.toISOString().split("T")[0], // "YYYY-MM-DD"
+                placeOfBirth: data.placeOfBirth,
+            });
+            router.push({
+                pathname: "/(setup)/verifyOtp",
+                params: { phoneNumber: formattedPhoneNumber }
+            });
+        } catch {
+            // error state is already set inside handleRegister via useAuth
+        }
     };
 
     const displayDate = selectedDate
@@ -256,11 +274,20 @@ export default function CreateCricketAccount() {
 
                 {/* ── Register Button ──────────────────────────────────── */}
                 <View className="mb-6">
+                    {error && (
+                        <Text className="text-red-500 text-xs text-center mb-2">{error}</Text>
+                    )}
                     <Pressable
-                        className="py-[14px] rounded-[10px] bg-primary mt-6"
+                        className={`py-[14px] rounded-[10px] mt-6 items-center ${loading ? "bg-primary/70" : "bg-primary"
+                            }`}
                         onPress={handleSubmit(onSubmit)}
+                        disabled={loading}
                     >
-                        <Text className="text-white text-center text-sm font-medium">Register</Text>
+                        {loading ? (
+                            <ActivityIndicator color="#ffffff" />
+                        ) : (
+                            <Text className="text-white text-center text-sm font-medium">Register</Text>
+                        )}
                     </Pressable>
                 </View>
             </View>

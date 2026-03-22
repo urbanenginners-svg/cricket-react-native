@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { router, Stack } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function VerifyOtp() {
+    const { phoneNumber } = useLocalSearchParams<{ phoneNumber: string }>();
     const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
     const [timer, setTimer] = useState(59);
     const [canResend, setCanResend] = useState(false);
     const inputRefs = useRef<(TextInput | null)[]>([]);
+
+    const { handleVerifyOtp, handleResendOtp, loading, error } = useAuth();
 
     // Countdown timer
     useEffect(() => {
@@ -46,16 +50,32 @@ export default function VerifyOtp() {
         if (!canResend) return;
         setTimer(59);
         setCanResend(false);
-        // TODO: Trigger resend OTP API call
+        if (phoneNumber) {
+            handleResendOtp(phoneNumber);
+        }
     };
 
-    const handleConfirm = () => {
-        router.replace("/(setup)/onboarding/selectRole");
-        // const otpCode = otp.join("");
-        // if (otpCode.length === 6) {
-        //     // TODO: Verify OTP API call
-        //     console.log("OTP entered:", otpCode);
-        // }
+    const handleConfirm = async () => {
+        try {
+            if (otp.some((digit) => digit === "")) {
+                alert("Please enter the complete OTP.");
+                return;
+            }
+            if (otp.length !== 6) {
+                alert("OTP must be 6 digits.");
+                return;
+            }
+            if (!phoneNumber) {
+                alert("Phone number is missing.");
+                return;
+            }
+            const otpCode = otp.join("");
+            await handleVerifyOtp({ phoneNumber, otp: otpCode });
+            router.replace("/(setup)/onboarding/selectRole");
+        } catch (err) {
+            console.log("OTP verification failed:", err);
+        }
+
     };
 
     const formatTime = (seconds: number) => {
@@ -80,7 +100,7 @@ export default function VerifyOtp() {
                     <Text className="text-grey_1 text-xs font-medium mt-[10px]">
                         A verification code has been sent to{" "}
                         <Text className="text-black_1 font-bold">
-                            +91 9876543210
+                            {phoneNumber || "your number"}
                         </Text>
                         .
                     </Text>
@@ -97,19 +117,24 @@ export default function VerifyOtp() {
                             value={digit}
                             onChangeText={(text) => handleChange(text, index)}
                             onKeyPress={(e) => handleKeyPress(e, index)}
-                            keyboardType="number-pad"
+                            keyboardType="numeric"
                             maxLength={1}
-                            selectTextOnFocus
-                            placeholder="-"
-                            placeholderTextColor="#9CA3AF"
                             className="flex-1 border border-stroke_grey_1 rounded-xl bg-white text-center text-xl font-semibold text-black_1"
                             style={{
                                 height: 50,
-                                lineHeight: 50,
+                                textAlignVertical: "center",
+                                textAlign: "center",
+                                padding: 0,
                             }}
                         />
                     ))}
                 </View>
+
+                {error && (
+                    <Text className="text-red-500 text-xs text-center mb-4">
+                        {error}
+                    </Text>
+                )}
 
                 {/* Resend Timer */}
                 <View className="mb-5">
@@ -136,6 +161,7 @@ export default function VerifyOtp() {
                 {/* Confirm Button */}
                 <Pressable
                     onPress={handleConfirm}
+                    disabled={loading}
                     className="py-[10px]  rounded-[10px] bg-primary"
                 >
                     <Text className="text-white text-center text-sm font-medium">
