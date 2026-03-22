@@ -9,11 +9,20 @@ export default function SetupLayout() {
     const segments = useSegments() as string[];
     const isOnboarding = segments.includes("onboarding");
 
-
+console.log(segments, ">>>>> segments in setup layout")
     const handleLogout = async () => {
         await AsyncStorage.clear();
         router.replace("/(auth)/login");
     };
+
+    const handleBack = () => {
+        if((segments.includes("(setup)") && segments.includes("selectPlayerType")) || (segments.includes("(setup)") && segments.includes("coachProfile"))){
+            router.replace("/(setup)/onboarding/selectRole")
+            return;
+        }
+        router.back();
+    }
+
 
     return <Stack
         screenOptions={{
@@ -24,7 +33,7 @@ export default function SetupLayout() {
             },
             headerLeft: () => (
                 <Pressable
-                    onPress={() => router.back()}
+                    onPress={handleBack}
                     // style={{ paddingHorizontal: 12 }}
                     className="pl-[2px]"
                 >
