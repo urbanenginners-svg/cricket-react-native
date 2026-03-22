@@ -20,7 +20,7 @@ export default function SelectRole() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "", headerLeft: () => null }} />
+            <Stack.Screen options={{ headerTitle: "", headerLeft: () => <></> }} />
 
             <View className="flex-1 bg-white px-8 pt-4">
                 <View className="mb-5">

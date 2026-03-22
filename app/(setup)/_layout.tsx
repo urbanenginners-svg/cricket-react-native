@@ -9,6 +9,7 @@ export default function SetupLayout() {
     const segments = useSegments() as string[];
     const isOnboarding = segments.includes("onboarding");
 
+
     const handleLogout = async () => {
         await AsyncStorage.clear();
         router.replace("/(auth)/login");
