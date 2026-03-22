@@ -13,6 +13,7 @@
 import { create } from "zustand";
 import * as SecureStore from "expo-secure-store";
 import { getProfile } from "@/services/userService";
+import { RoleEnum } from "@/types/enums/roleEnum";
 
 // ── SecureStore Key Names ──────────────────────
 export const SECURE_STORE_KEYS = {
@@ -25,9 +26,11 @@ export interface User {
   fullName: string;
   email?: string;
   phone?: string;
-  role?: "player" | "coach" | "academy_owner" | null;
   profileImage?: string;
   isOnboardingCompleted?: boolean;
+  roles: {
+    name: RoleEnum;
+  }[]
 }
 
 interface AuthState {

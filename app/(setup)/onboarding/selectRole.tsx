@@ -44,7 +44,7 @@ export default function SelectRole() {
                 <View className="flex-row gap-4">
                     {/* Player Card */}
                     <Pressable
-                        onPress={() => setSelectedRole(RoleEnum.player)}
+                        onPress={() => setSelectedRole(RoleEnum.PLAYER)}
                         className={`flex-1 items-center justify-center py-5 px-3 rounded-2xl border-2 ${selectedRole === "player"
                             ? "border-primary bg-blue-50"
                             : "border-stroke_grey_1 bg-white"
