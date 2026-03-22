@@ -86,6 +86,7 @@ export const verifyOtp = async (
   payload: VerifyOtpPayload,
 ): Promise<AuthResponse> => {
   const response = await apiClient.post(AUTH_ENDPOINTS.VERIFY_OTP, payload);
+  console.log(response, ">>>>> resposneeeee");
   return response.data;
   //   throw new Error("verifyOtp() not implemented yet");
 };
