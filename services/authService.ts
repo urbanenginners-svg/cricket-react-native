@@ -11,6 +11,7 @@
 import { GenderEnum } from "@/types/enums/genderEnum";
 import apiClient from "./api";
 import { AUTH_ENDPOINTS } from "@/constants/api";
+import { RoleEnum } from "@/types/enums/roleEnum";
 
 // ── Request / Response Types ───────────────────
 
@@ -32,6 +33,10 @@ export interface VerifyOtpPayload {
   otp: string;
 }
 
+
+export interface SelectRolePayload{
+  role: RoleEnum
+}
 export interface AuthResponse {
   user: {
     id: string;
@@ -49,6 +54,10 @@ export interface AuthResponse {
     createdAt: string;
   };
   access_token: string;
+}
+
+export interface SelectRoleResponse{
+
 }
 
 // ── Service Functions ──────────────────────────
@@ -90,6 +99,13 @@ export const verifyOtp = async (
   return response.data;
   //   throw new Error("verifyOtp() not implemented yet");
 };
+
+export const selectRole = async (payload: SelectRolePayload) :Promise<SelectRoleResponse> => {
+  const response = await apiClient.post(AUTH_ENDPOINTS.SELECT_ROLE,payload)
+  return response.data
+}
+
+
 
 /**
  * Resend OTP to the user's phone.

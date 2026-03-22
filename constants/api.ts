@@ -11,6 +11,7 @@ export const BASE_URL = "http://10.0.2.2:3000/api/v1"; // 🔴 Replace with your
 export const AUTH_ENDPOINTS = {
   REGISTER: "/users/onboarding/step1",
   VERIFY_OTP: "/users/onboarding/verify-otp",
+  SELECT_ROLE: "/users/onboarding/step2",
   // LOGIN: "/auth/login",
   // RESEND_OTP: "/auth/resend-otp",
   // LOGOUT: "/auth/logout",

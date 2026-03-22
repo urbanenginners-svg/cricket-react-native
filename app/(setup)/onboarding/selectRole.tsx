@@ -4,17 +4,25 @@ import { Text, View, TouchableOpacity, Pressable } from "react-native";
 
 import PlayerIcon from "@/assets/images/bat_ball.svg";
 import CoachIcon from "@/assets/images/cap.svg";
+import { selectRole } from "@/services/authService";
+import { RoleEnum } from "@/types/enums/roleEnum";
 
-type Role = "player" | "coach" | null;
 
 export default function SelectRole() {
-    const [selectedRole, setSelectedRole] = useState<Role>(null);
+    const [selectedRole, setSelectedRole] = useState<RoleEnum | "">("");
 
-    const handleContinue = () => {
-        if (selectedRole === "player") {
-            router.push("/(setup)/onboarding/playerOnboarding/selectPlayerType");
-        } else if (selectedRole === "coach") {
-            router.push("/(setup)/onboarding/coachOnboarding/coachProfile");
+    const handleContinue = async () => {
+
+        try{
+            const response = await selectRole({role: selectedRole as RoleEnum})
+                console.log(response, ">>>>> response")
+            if (selectedRole === "player") {
+                router.push("/(setup)/onboarding/playerOnboarding/selectPlayerType");
+            } else if (selectedRole === "coach") {
+                router.push("/(setup)/onboarding/coachOnboarding/coachProfile");
+            }
+        }catch (error: any){
+            alert(error?.response?.data?.message ?? error?.message ?? "Something went wrong")
         }
     };
 
@@ -36,7 +44,7 @@ export default function SelectRole() {
                 <View className="flex-row gap-4">
                     {/* Player Card */}
                     <Pressable
-                        onPress={() => setSelectedRole("player")}
+                        onPress={() => setSelectedRole(RoleEnum.player)}
                         className={`flex-1 items-center justify-center py-5 px-3 rounded-2xl border-2 ${selectedRole === "player"
                             ? "border-primary bg-blue-50"
                             : "border-stroke_grey_1 bg-white"
@@ -55,7 +63,7 @@ export default function SelectRole() {
 
                     {/* Coach Card */}
                     <Pressable
-                        onPress={() => setSelectedRole("coach")}
+                        onPress={() => setSelectedRole(RoleEnum.COACH)}
                         className={`flex-1 items-center justify-center py-5 px-3 rounded-2xl border-2 ${selectedRole === "coach"
                             ? "border-primary bg-blue-50"
                             : "border-stroke_grey_1 bg-white"
